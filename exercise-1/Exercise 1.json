@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "title": "Exercise 1",
+  "description": "See cg1.oglaroon.cc/lesson1 and cg1.oglaroon.cc/exercise1 for the accompanying lesson/exercise.",
+  "programs": [
+    {
+      "version": 1,
+      "name": "Default",
+      "vertex": "#version 100\n\nattribute vec3 v_Position;\n\nuniform mat4 modelview;\nuniform mat4 projection;\n\nvoid main() {\n    gl_Position = projection * modelview * vec4(v_Position, 1);\n}",
+      "fragment": "#version 100\n\nvoid main() {\n    gl_FragColor = vec4(1.0, 1.0, 1.0, 1.0);\n}",
+      "isDefault": true
+    }
+  ],
+  "javascript": "function getTriangleBuffer(c) {\n    triangleVertexPositionBuffer = c.gl.createBuffer();\n    c.gl.bindBuffer(c.gl.ARRAY_BUFFER, triangleVertexPositionBuffer);\n    var vertices = [\n        0.0,  1.0,  0.0,\n        -1.0, -1.0,  0.0,\n        1.0, -1.0,  0.0\n    ];\n    c.gl.bufferData(c.gl.ARRAY_BUFFER, new Float32Array(vertices), c.gl.STATIC_DRAW);\n    triangleVertexPositionBuffer.itemSize = 3;\n    triangleVertexPositionBuffer.numItems = 3;\n\n    return triangleVertexPositionBuffer;\n}\n\nfunction init(c) {\n    // vertex buffer data\n    this.triangle = getTriangleBuffer(c);\n\n    // init GL render state\n    c.gl.clearColor(0.0, 0.0, 0.0, 1.0);\n}\n\nfunction render(c) {\n    // set 'Default' as current shader program\n    c.gl.useProgram(c.programs.Default.program);\n\n    // get locations of uniforms/attributes and enable the latter\n    var prLocation = c.gl.getUniformLocation(c.programs.Default.program, \"projection\");\n    var mvLocation = c.gl.getUniformLocation(c.programs.Default.program, \"modelview\");\n    var vattribLocation = c.gl.getAttribLocation(c.programs.Default.program, \"v_Position\");\n    c.gl.enableVertexAttribArray(vattribLocation);\n\n    // get canvas dimensions\n    var w = c.gl.canvas.clientWidth;\n    var h = c.gl.canvas.clientHeight;\n\n    // init projection matrix\n    var pr = c.math.mat4.create();\n    c.math.mat4.perspective(pr, 45 * Math.PI / 180.0, w / h, 0.1, 100.0);\n    c.gl.uniformMatrix4fv(prLocation, false, pr);\n\n    // init modelview matrix\n    var mv = c.math.mat4.create();\n    c.math.mat4.identity(mv);\n\n    // clear framebuffer\n    c.gl.viewport(0, 0, w, h);\n    c.gl.clear(c.gl.COLOR_BUFFER_BIT);\n\n    // render triangle\n    c.math.mat4.translate(mv, mv, [-1.5, 0.0, -7.0]);\n    c.gl.uniformMatrix4fv(mvLocation, false, mv);\n    c.gl.bindBuffer(c.gl.ARRAY_BUFFER, this.triangle);\n    c.gl.vertexAttribPointer(vattribLocation, this.triangle.itemSize, c.gl.FLOAT, false, 0, 0);\n    c.gl.drawArrays(c.gl.TRIANGLES, 0, this.triangle.numItems);\n\n    c.math.mat4.translate(mv, mv, [3.0, 0.0, -7.0]);\n}",
+  "creationTime": "2015-04-15T15:17:40.015Z",
+  "authors": [
+    {
+      "name": "ich",
+      "license": "CC BY",
+      "year": 2015
+    },
+    {
+      "name": "richard",
+      "license": "CC 0",
+      "year": 2015
+    }
+  ]
+}
