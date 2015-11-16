@@ -1,0 +1,45 @@
+% header
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% the document
+\begin{document}
+
+% create the title
+% Please replace the data in brackets [] with actual data.
+\title{Solution - Exercise [$2$]\\
+\small{Introduction to Computer Graphics - B-IT Master Course}}
+\author{ [Melisa Cecilia] \and [Duy Khánh] \and [Chenyu Zhao]}
+\date{\today}
+\maketitle
+
+\section*{Exercise 1}
+Given are two points p1,p2 on the unit sphere in ?3. Using a quaternion the point p1 is to be rotated onto the point p2.\\
+
+a. Give a formula to determine the angle of rotation $\alpha$
+\begin{gather*}
+\alpha = \arccos{\{\dfrac{q_1.q_2}{|q_1|.|q_2|}\}}
+\end{gather*}
+
+b. Give a formula to detemine the rotation axis v
+\begin{gather*}
+v = q_1.q_2
+\end{gather*}
+
+c. Write down the quaternion q which performs the rotation with angle $\alpha$ around v
+
+d. Write down the relationship between p1 and p2 using quaternion multiplication
+\begin{gather*}
+q1 = q1_0 + \textbf{i} q1_1 + \textbf{j} q1_2 + \textbf{k} q1_3 \\
+q2 = q2_0 + \textbf{i} q2_1 + \textbf{j} q2_2 + \textbf{k} q2_3 \\ \\
+q1 × q2 = (q1_0q2_0 - q1_1q2_1 - q1_3q2_3 - q1_4) + \textbf{i} (q1_1q2_0 + q1_0q2_1 + q1_3q2_3 - q1_4q2_2) + \\ \textbf{j} (q1_0q2_2 - q1_1q2_3 + q1_2q2_0 + q1_3q2_1 ) + \textbf{k} (q1_0q2_3 + q1_1q2_2 - q1_2q2_1 + q1_3q2_0)
+\end{gather*}
+
+\section*{Exercise 2}
+And some more text \ldots
+
+\end{document}
