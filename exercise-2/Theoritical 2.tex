@@ -13,7 +13,7 @@
 % Please replace the data in brackets [] with actual data.
 \title{Solution - Exercise [$2$]\\
 \small{Introduction to Computer Graphics - B-IT Master Course}}
-\author{ [Melisa Cecilia] \and [Duy Khánh] \and [Chenyu Zhao]}
+\author{ [Melisa Cecilia] \and [Duy Khanh Gian] \and [Chenyu Zhao]}
 \date{\today}
 \maketitle
 
@@ -40,12 +40,92 @@ q = \cos(\dfrac{a}{2}) + i (x \sin\dfrac{a}{2}) + j (y \sin\dfrac{a}{2}) + k ( z
 
 d. Write down the relationship between p1 and p2 using quaternion multiplication
 \begin{gather*}
-q1 = q1_0 + \textbf{i} q1_1 + \textbf{j} q1_2 + \textbf{k} q1_3 \\
-q2 = q2_0 + \textbf{i} q2_1 + \textbf{j} q2_2 + \textbf{k} q2_3 \\ \\
-q1 × q2 = (q1_0q2_0 - q1_1q2_1 - q1_3q2_3 - q1_4) + \textbf{i} (q1_1q2_0 + q1_0q2_1 + q1_3q2_3 - q1_4q2_2) + \\ \textbf{j} (q1_0q2_2 - q1_1q2_3 + q1_2q2_0 + q1_3q2_1 ) + \textbf{k} (q1_0q2_3 + q1_1q2_2 - q1_2q2_1 + q1_3q2_0)
+q_1 = q_{10} + \textbf{i} q_{11} + \textbf{j} q_{12} + \textbf{k} q_{13} \\
+q_2 = q_{20} + \textbf{i} q_{21} + \textbf{j} q_{22} + \textbf{k} q_{23}
 \end{gather*}
 
+\begin{multline*}
+q_1 × q_2 = (q_{10}q_{20} - q_{11}q_{21} - q_{13}q_{23} - q_{14}) + \textbf{i} (q_{11}q_{20} + q_{10}q_{21} + q_{13}q_{23} - q_{14}q_{22}) \\ 
++ \textbf{j} (q_{10}q_{22} - q_{11}q_{23} + q_{12}q_{20} + q_{13}q_{21} ) + \textbf{k} (q_{10}q_{23} + q_{11}q_{22} - q_{12}q_{21} + q_{13}q_{20})
+\end{multline*}
+
 \section*{Exercise 2}
-And some more text \ldots
+
+Given a point p $\epsilon$ $\mathbb{R}$ 3 in homogenous coordinates (x y z 1)\textsuperscript{T}: \\
+
+Rotation Matrix \\ \\
+\(
+R_z=
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & 0\\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\) \\ \\
+
+Translation Matrix \\ \\
+\(
+T_t=
+  \begin{pmatrix}
+    1 & 0 & 0 & t_1 \\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\) \\ \\
+
+a. Derive a matrix $M_1$ which first rotates the point $\alpha$ degrees ($\alpha$ is given in radians) around the axis (0 0 1)T and then performs a translation with an offset of (t1 t2 t3)\textsuperscript{T} \\
+
+\begin{equation*} \label{eq_M1}
+\begin{aligned}
+M_1 &= 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & 0\\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} . 
+    \begin{pmatrix}
+    1 & 0 & 0 & t_1 \\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} \\ \\
+  &= 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & t_1\cos(\alpha) - t_2\sin(\alpha) \\
+    \sin(\alpha) & \cos(\alpha) & 0 & t_1\sin(\alpha) + t_2\cos(\alpha) \\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\end{aligned}
+\end{equation*} \\ \\
+
+b. Derive a matrix $M_2$ which first performs a translation with an offset of (t1 t2 t3)\textsuperscript{T}  and then rotates the point $\alpha$ degrees ($\alpha$ is given in radians) around the axis (0 0 1)\textsuperscript{T} \\
+s\begin{equation*} \label{eq_M1}
+\begin{aligned}
+M_2 &= 
+    \begin{pmatrix}
+    1 & 0 & 0 & t_1 \\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} . 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & 0\\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} \\ \\
+  &= 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & t_1 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\end{aligned}
+\end{equation*}
 
 \end{document}
