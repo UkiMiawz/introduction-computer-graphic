@@ -22,31 +22,31 @@ Given are two points p1,p2 on the unit sphere in ?3. Using a quaternion the poin
 
 a. Give a formula to determine the angle of rotation $\alpha$
 \begin{gather*}
-\alpha = \arccos{\{\dfrac{q_1.q_2}{|q_1|.|q_2|}\}}
+\alpha = \arccos{\{\dfrac{p_1.p_2}{\|p_1\|.\|p_2\|}\}}
 \end{gather*}
 
 b. Give a formula to detemine the rotation axis v
 \begin{gather*}
-v = q_1.q_2
+\quad v = p_1\times p_2
 \end{gather*}
 
 c. Write down the quaternion q which performs the rotation with angle $\alpha$ around v
 
 \begin{gather*}
-a = rotation angle \\
-x,y,z = rotation axis \\
-q = \cos(\dfrac{a}{2}) + i (x \sin\dfrac{a}{2}) + j (y \sin\dfrac{a}{2}) + k ( z \sin\dfrac{a}{2})\\
+a = \text{rotation angle} \\
+v = \text{rotation axis} \\
+q = \cos(\dfrac{a}{2}) + i (x \sin\dfrac{a}{2}) + j (y \sin\dfrac{a}{2}) + k ( z \sin\dfrac{a}{2}) \\
 \end{gather*}
 
 d. Write down the relationship between p1 and p2 using quaternion multiplication
 \begin{gather*}
-q_1 = q_{10} + \textbf{i} q_{11} + \textbf{j} q_{12} + \textbf{k} q_{13} \\
-q_2 = q_{20} + \textbf{i} q_{21} + \textbf{j} q_{22} + \textbf{k} q_{23}
+p_1 = p_{10} + \textbf{i} p_{11} + \textbf{j} p_{12} + \textbf{k} p_{13} \\
+p_2 = p_{20} + \textbf{i} p_{21} + \textbf{j} p_{22} + \textbf{k} p_{23}
 \end{gather*}
 
 \begin{multline*}
-q_1 × q_2 = (q_{10}q_{20} - q_{11}q_{21} - q_{13}q_{23} - q_{14}) + \textbf{i} (q_{11}q_{20} + q_{10}q_{21} + q_{13}q_{23} - q_{14}q_{22}) \\ 
-+ \textbf{j} (q_{10}q_{22} - q_{11}q_{23} + q_{12}q_{20} + q_{13}q_{21} ) + \textbf{k} (q_{10}q_{23} + q_{11}q_{22} - q_{12}q_{21} + q_{13}q_{20})
+p_1 × p_2 = (p_{10}p_{20} - p_{11}p_{21} - p_{13}p_{23} - p_{14}) + \textbf{i} (p_{11}p_{20} + p_{10}p_{21} + p_{13}p_{23} - p_{14}p_{22}) \\ 
++ \textbf{j} (p_{10}p_{22} - p_{11}p_{23} + p_{12}p_{20} + p_{13}p_{21} ) + \textbf{k} (p_{10}p_{23} + p_{11}p_{22} - p_{12}p_{21} + p_{13}p_{20})
 \end{multline*}
 
 \section*{Exercise 2}
@@ -80,6 +80,34 @@ a. Derive a matrix $M_1$ which first rotates the point $\alpha$ degrees ($\alpha
 \begin{equation*} \label{eq_M1}
 \begin{aligned}
 M_1 &= 
+    \begin{pmatrix}
+    1 & 0 & 0 & t_1 \\
+    0 & 1 & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} . 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & 0\\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} \\ \\
+  &= 
+  \begin{pmatrix}
+    \cos(\alpha) & -\sin(\alpha) & 0 & t_1 \\
+    \sin(\alpha) & \cos(\alpha) & 0 & t_2\\
+    0 & 0 & 1 & t_3 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\end{aligned}
+\end{equation*} \\ \\
+
+
+b. Derive a matrix $M_2$ which first performs a translation with an offset of (t1 t2 t3)\textsuperscript{T}  and then rotates the point $\alpha$ degrees ($\alpha$ is given in radians) around the axis (0 0 1)\textsuperscript{T} \\
+
+\begin{equation*} \label{eq_M1}
+\begin{aligned}
+M_2 &= 
   \begin{pmatrix}
     \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
     \sin(\alpha) & \cos(\alpha) & 0 & 0\\
@@ -102,30 +130,8 @@ M_1 &=
 \end{aligned}
 \end{equation*} \\ \\
 
-b. Derive a matrix $M_2$ which first performs a translation with an offset of (t1 t2 t3)\textsuperscript{T}  and then rotates the point $\alpha$ degrees ($\alpha$ is given in radians) around the axis (0 0 1)\textsuperscript{T} \\
-s\begin{equation*} \label{eq_M1}
-\begin{aligned}
-M_2 &= 
-    \begin{pmatrix}
-    1 & 0 & 0 & t_1 \\
-    0 & 1 & 0 & t_2\\
-    0 & 0 & 1 & t_3 \\
-    0 & 0 & 0 & 1
-  \end{pmatrix} . 
-  \begin{pmatrix}
-    \cos(\alpha) & -\sin(\alpha) & 0 & 0 \\
-    \sin(\alpha) & \cos(\alpha) & 0 & 0\\
-    0 & 0 & 1 & 0 \\
-    0 & 0 & 0 & 1
-  \end{pmatrix} \\ \\
-  &= 
-  \begin{pmatrix}
-    \cos(\alpha) & -\sin(\alpha) & 0 & t_1 \\
-    \sin(\alpha) & \cos(\alpha) & 0 & t_2\\
-    0 & 0 & 1 & t_3 \\
-    0 & 0 & 0 & 1
-  \end{pmatrix}
-\end{aligned}
-\end{equation*}
+
+c. In which way affects the order of operations the respective final transformation matrix in this case \\
+if the point translates before doing the rotation, the final transformation matrix has to rotate this translation offset too. On the other hand, if it rotates first, then we simply need to add the translation offset into the final transformation matrix. 
 
 \end{document}
