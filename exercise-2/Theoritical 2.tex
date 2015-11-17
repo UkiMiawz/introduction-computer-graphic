@@ -125,7 +125,7 @@ M_2 &=
 \end{equation*} \\ \\
 
 
-c. In which way affects the order of operations the respective final transformation matrix in this case \\
-if the point translates before doing the rotation, the final transformation matrix has to rotate this translation offset too. On the other hand, if it rotates first, then we simply need to add the translation offset into the final transformation matrix. 
+c. In which way affects the order of operations the respective final transformation matrix in this case \\ \\
+The order matters when you need to apply rotation and translation to a Matrix. This transformation will involves rotation which is generally not commutable. Translation itself is commutable since its basically addition of vectors so the order doesn't matter. But rotation matrix is generally not commutable. This is why the result of doing translation first rotation second and rotation first translation second will be different.
 
 \end{document}
