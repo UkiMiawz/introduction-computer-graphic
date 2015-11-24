@@ -1,4 +1,8 @@
-exercise-2/Theoritical 2.aux
-exercise-2/Theoritical 2.log
-exercise-2/Theoritical 2.out
-exercise-2/Theoritical 2.synctex.gz
+*.aux
+*.log
+*.out
+*.synctex.gz
+*.aux
+*.log
+*.out
+*.synctex.gz
