@@ -1,0 +1,43 @@
+% header
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% the document
+\begin{document}
+
+% create the title
+% Please replace the data in brackets [] with actual data.
+\title{Solution - Exercise [$4$]\\
+\small{Introduction to Computer Graphics - B-IT Master Course}}
+\author{ [Melisa Cecilia] \and [Duy Khanh Gian] \and [Chenyu Zhao]}
+\date{\today}
+\maketitle
+
+\section*{Theoretical Exercise}
+Consider slide 51 of the "Projections" slideset available on the Lecture website (note that a new version of this slideset has been uploaded a short time ago, so please make sure you have a current version). On the slide you find a perspective transformation matrix as used by OpenGL.\\
+
+1. Describe the meaning of all variables in the matrix. \\
+
+These values specify the near and far clipping planes. In a nutshell, they specify how far the clipping planes are from the apex (camera in OpenGL case). \\
+n = near $\rightarrow$ The distance from the apex to the view port \\
+f = far $\rightarrow$ The distance from the apex to the real object or point \\ \\
+
+These 4 parameters described the 4 points of the rectangle view port of the apex (camera) \\
+r = right $\rightarrow$ The right value of the rectangle view port \\
+l = left $\rightarrow$ The left value of the rectangle view port \\
+t = top $\rightarrow$ The top value of the rectangle view port \\
+b = bottom $\rightarrow$ The bottom value of the rectangle view port \\ \\
+
+Using those variables, the left top point of the rectangle view port will have vector value (l, t, n), the right top point (r, t, n), etc. \\ \\
+
+2. What is the purpose of the ?1 in the last row? Briefly explain in words how it affects the perspective division step. \\ \\
+
+The eye coordinates are defined in the right-handed coordinate system, but NDC (normalized device coordinates) uses the left-handed coordinate system. That is, the camera at the origin is looking along -Z axis in eye space, but it is looking along +Z axis in NDC. Since glFrustum() function in OpenGL accepts only positive values of near and far distances, we need to negate them during the construction of OpenGL projection matrix. \\
+
+3. In the bottom part of the slide, a derivation of the perspective transformation matrix as a product of several simpler matrices is shown. However, this derivation only accounts for symmetric viewing frustums and does not yield the more general case shown in the top part of the slide which accounts for asymmetric viewing frustums. What final transformation step is necessary to obtain the general case for asymmetric viewing frustums? Give the matrix which needs to be multiplied (from the left) to the product of matrices given in the bottom part of the slides such that the matrix for the general case is obtained. Describe in a few words what this additional transformation does. \\
+
+\end{document}
