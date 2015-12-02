@@ -53,12 +53,52 @@ The matrix : \\
 \(
 S =
   \begin{pmatrix}
-    n & 0 & -\dfrac{n+l}{n-l} & 0 \\
-    0 & n & -\dfrac{t+b}{t-b} & 0\\
-    0 & 0 & 1 & 0 \\
-    0 & 0 & 0 & 1
+    n & 0 & -\dfrac{n(r+l)}{r-l} & 0 \\
+    0 & n & -\dfrac{n(t+b)}{t-b} & 0\\
+    0 & 0 & n & 0 \\
+    0 & 0 & 0 & n
   \end{pmatrix}
 \) \\ \\
 
+So the final lines of the matrices will be (left to right, continuing to the second line) \\
+
+\(
+  \begin{pmatrix}
+    n & 0 & -\dfrac{n(r+l)}{r-l} & 0 \\
+    0 & n & -\dfrac{n(t+b)}{t-b} & 0\\
+    0 & 0 & n & 0 \\
+    0 & 0 & 0 & n
+  \end{pmatrix}
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & -1 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+     \dfrac{2}{r-l} & 0 & 0 & 0 \\
+    0 & \dfrac{2}{t-b} & 0 & 0\\
+    0 & 0 & \dfrac{2f}{(f-n)n} & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix} \\ \\ \\
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & 0 \\
+    0 & 0 & \dfrac{1}{n} & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0\\
+    0 & 0 & 1 & -n \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+  \begin{pmatrix}
+    1 & 0 & 0 & 0 \\
+    0 & 1 & 0 & 0\\
+    0 & 0 & -1 & 0 \\
+    0 & 0 & 0 & 1
+  \end{pmatrix}
+\) \\ \\
 
 \end{document}
