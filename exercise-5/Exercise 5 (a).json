@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "title": "Exercise 5 (a)",
+  "description": "For the corresponding exercise visit cg1.oglaroon.cc/exercise5",
+  "programs": [
+    {
+      "version": 1,
+      "name": "Default",
+      "vertex": "#version 100\n\nprecision highp float;\n\nattribute vec3 v_Position;\n\nuniform mat4 modelViewProjection;\n\nvarying vec2 coord;\n\nvoid main() {\n    gl_Position = modelViewProjection * vec4(v_Position, 1);\n    coord = (gl_Position.xy / gl_Position.w);\n}",
+      "fragment": "#version 100\n\nprecision highp float;\n\n// iff |v|^2 > max_value we assume divergence\nuniform float max_value;\n\n// time variable\nuniform float time;\n\n// coord is our z, this is in [-1,1] x [-1, 1]\nvarying vec2 coord;\n\nconst int max_iterations = 255;\n\n\nvec2 cmult(vec2 a, vec2 b) {\n    // Task: implement complex multiplication\n    // a.x and b.x are real parts; a.y and b.y are imaginary parts\n    vec2 c;\n    c.x = (a.x*b.x) - (a.y*b.y);\n    c.y = (a.x*b.y) + (a.y*b.x);\n    return c;\n}\n\nvoid main() {\n    // our imaginary coord - z.x is real part, z.y is imaginary part\n    vec2 z = coord;\n    // we define c to be a constant value + perturbation based on the time variable\n    vec2 c = vec2( 0.285, 0.01 ) + (2.0 * time - 1.0) * 0.001;\n\n    int count = max_iterations;\n\n\tfor ( int i = 0 ; i < max_iterations; i++ ) {\n        // TASK:\n        // implement iteration step\n        z = cmult(z,z) + c;\n\t\tif ( dot( z, z ) > max_value ) {\n\t\t\tcount = i;\n\t\t\tbreak;\n        }\n\t}\n\n    vec4 bg = vec4(0.2, 0.2, 0.2, 1.0);\n    vec4 fg = vec4(1.0, 1.0, 1., 1.0);\n    float lambda = float( count ) / float(max_iterations);\n    gl_FragColor = vec4( vec3(mix(bg, fg, lambda)), 1.0 );\n\n}",
+      "isDefault": true
+    }
+  ],
+  "javascript": "function ui(c) {\n    var ui = c.ui;\n\n    ui.add(ui.grid({\n        children: [\n            ui.label({ value: 'max_value:', title: 'Max number of iterations' }),\n            ui.slider({\n                bind: [this, 'max_value'],\n                min: 0.1,\n                max: 4.0\n            })\n        ]\n    }), { right: 10, bottom: 6 });\n}\n\n\n\nfunction init(c) {\n    // fullscreen quad\n    this.quad = new c.models.Quad(c, [0,0,0], [1,0,0], [1,1,0], [0,1,0]);\n    // orthographic projection\n    this.view = c.models.View.orthographic(c, null, -1, 1, {\n        interactive: false // disable mouse rotation\n    });\n\n    this.max_value = 3.0;\n    ui.call(this, c);\n}\n\nfunction render(c) {\n    c.view(this.view);\n    var t = (new Date).getTime() / 1000 % 10.0;\n    this.quad.render(c, {uniforms: { max_value: this.max_value, time: t }});\n}",
+  "creationTime": "2015-05-18T13:47:26.543Z",
+  "authors": [
+    {
+      "name": "richard",
+      "license": "CC 0",
+      "year": 2015
+    }
+  ]
+}
