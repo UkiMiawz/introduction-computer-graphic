@@ -26,7 +26,7 @@ This exercise refers to the "raster algorithms" slideset of the lecture. \\
 1. Describe what changes are necessary to generalize the Liang-Barsky line clipping algorithm to n-dimensional space
 \end{flushleft}
 
- We will need to use the same logic for 2D clipping (comparing the line with 4 intersection points, 2 for x and 2 for y) with the 2*n intersection points in n-dimensional space. The number 2 is because each line inside the volume has a maximum of 2 intersections (max and min). So for 3D space, with Liang-Barsky we will need to compare the lines with 6 intersection points (2 for x, 2 for y, and 2 for z) \\
+ We will need to use the same logic for 2D clipping (comparing the line with 4 intersection points, 2 for x and 2 for y) with the 2*n intersection points in n-dimensional space. The number 2 is because each line inside the volume has a maximum of 2 intersections (max and min). So for 3D space, with Liang-Barsky we will need to compare the lines with 2*3 = 6 intersection points (2 for x, 2 for y, and 2 for z) \\
  
 \begin{flushleft}
 2. Visualize the logic of the Sutherland-Hodgman polygon clipping algorithm using either a flow diagram or pseudo code
