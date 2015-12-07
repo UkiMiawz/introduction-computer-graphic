@@ -1,0 +1,46 @@
+% header
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% the document
+\begin{document}
+
+% create the title
+% Please replace the data in brackets [] with actual data.
+\title{Solution - Exercise [$5$]\\
+\small{Introduction to Computer Graphics - B-IT Master Course}}
+\author{ [Melisa Cecilia] \and [Duy Khanh Gian] \and [Chenyu Zhao]}
+\date{\today}
+\maketitle
+
+\section*{Theoretical Exercise}
+{\bf Clipping algorithms } \\
+
+This exercise refers to the "raster algorithms" slideset of the lecture. \\
+
+\begin{flushleft}
+1. Describe what changes are necessary to generalize the Liang-Barsky line clipping algorithm to n-dimensional space
+\end{flushleft}
+
+ We will need to use the same logic for 2D clipping (comparing the line with 4 intersection points, 2 for x and 2 for y) with the 2*n intersection points in n-dimensional space. The number 2 is because each line inside the volume has a maximum of 2 intersections (max and min). So for 3D space, with Liang-Barsky we will need to compare the lines with 6 intersection points (2 for x, 2 for y, and 2 for z) \\
+ 
+\begin{flushleft}
+2. Visualize the logic of the Sutherland-Hodgman polygon clipping algorithm using either a flow diagram or pseudo code
+\end{flushleft}
+
+\begin{align*}
+  &\text{For Each Edge in clipping polygon} \\
+  & \hspace{1cm} \text{create plane for edge} \\
+  & \hspace{1cm} \text{For Each Vertex pair in subject polygon} \\
+  	& \hspace{2cm} \text{determine case number from starting vertex, ending vertex, and edge} \\
+	& \hspace{2cm} \text{perform case operation} \\
+  & \hspace{1cm} \text{End For Each} \\
+  & \hspace{1cm} \text{update subject polygon with new vertices} \\
+  &\text{End For Each}
+\end{align*}
+
+\end{document}
