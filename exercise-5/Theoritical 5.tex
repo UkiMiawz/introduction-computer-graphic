@@ -20,13 +20,13 @@
 \section*{Theoretical Exercise}
 {\bf Clipping algorithms } \\
 
-This exercise refers to the "raster algorithms" slideset of the lecture. \\
+This exercise refers to the "raster algorithms" slideset of the lecture.
 
 \begin{flushleft}
 1. Describe what changes are necessary to generalize the Liang-Barsky line clipping algorithm to n-dimensional space
 \end{flushleft}
 
- We will need to use the same logic for 2D clipping (comparing the line with 4 intersection points, 2 for x and 2 for y) with the 2*n intersection points in n-dimensional space. The number 2 is because each line inside the volume has a maximum of 2 intersections (max and min). So for 3D space, with Liang-Barsky we will need to compare the lines with 2*3 = 6 intersection points (2 for x, 2 for y, and 2 for z) \\
+We will need to use the same logic for 2D clipping (comparing the line with 4 intersection points, 2 for x and 2 for y) with the 2*n intersection points in n-dimensional space. The number 2 is because each line inside the volume has a maximum of 2 intersections (max and min). So for example for 3D space, with Liang-Barsky we will need to compare the lines with 2*3 = 6 intersection points (2 for x, 2 for y, and 2 for z) \\
  
 \begin{flushleft}
 2. Visualize the logic of the Sutherland-Hodgman polygon clipping algorithm using either a flow diagram or pseudo code
@@ -42,5 +42,47 @@ This exercise refers to the "raster algorithms" slideset of the lecture. \\
   & \hspace{1cm} \text{update subject polygon with new vertices} \\
   &\text{End For Each}
 \end{align*}
+
+\begin{flushleft}
+{\bf Barycentric coordinates and color interpolation } \\
+\end{flushleft}
+
+As you have seen in previous practical exercises, OpenGL interpolates vertex attributes (for instance, colors) linearly between the vertices of primitives (for instance, triangles) when using varying variables to pass attributes from the vertex to the fragment shader. In this exercise, you will determine the color value of a point within a triangle which has different colors assigned to its three vertices. \\
+
+This exercise refers to the "transformations" and "light and colors" slidesets.
+
+Let $\Delta(v1,v2,v3)$ be a 2D triangle with vertices $v1=(0,0)^T, v2=(1,0)^T, v3=(0.5,1)^T$. Furthermore, let $c(vi)=(ri,gi,bi)$ be the RGB color associated with vertex i. The colors for the three vertices are $c(v1)=(1,0,0), c(v2)=(0,1,0), c(v3)=(0,0,1).$
+
+\begin{flushleft}
+1. Determine the barycentric coordinates of the point $x=(0.6,0.4)^T$.
+\end{flushleft}
+
+\begin{gather*}
+v_1(0,0), v_2(1,0), v_3(0.5,1), x(0.6, 0.4) \\ \\
+\text{Barycentric coordinates for point x} \\
+x = \alpha v_1 +  \beta v_2 + \gamma v_3 \\ \\
+\alpha = \dfrac{(v_2.y - v_3.y)(x.x - v_3.x) + (v_3.x - v_2.x)(x.y - v_3.y)}{(v_2.y - v_3.y)(v_1.x - v_3.x) + (v_3.x - v_2.x)(v_1.y - v_3.y)} \\ \\
+\beta = \dfrac{(v_3.y - v_1.y)(x.x - v_3.x) + (v_1.x - v_3.x)(x.y - v_3.y)}{(v_2.y - v_3.y)(v_1.x - v_3.x) + (v_3.x - v_2.x)(v_1.y - v_3.y)} \\ \\
+\gamma = 1 - \alpha - \beta \\ \\
+\text{Put the numbers in} \\
+\alpha = \dfrac{(0 - 1)(0.6 - 0.5) + (0.5 - 0)(0.4 - 1)}{(0 - 1)(0 - 0.5) + (0.5 - 1)(0 - 1)} = 0.2 \\ \\
+\beta = \dfrac{(1 - 0)(0.6 - 0.5) + (0 - 0.5)(0.4 - v_3.y)}{(0 - 1)(0 - 0.5) + (0.5 - 1)(0 - 1)} = 0.4 \\ \\
+\gamma = 1 - 0.2 - 0.4 = 0.4 \\ \\
+\text{Barycentric coordinates for point x} \\
+x = 0.2 v_1 +  0.4 v_2 + 0.4 v_3
+\end{gather*}
+
+\begin{flushleft}
+2. Using the barycentric coordinates, determine the linearly interpolated color value that should be assigned to point x.
+\end{flushleft}
+
+\begin{gather*}
+c(v_1) = (1,0,0), c(v_2) = (0,1,0), c(v_3) = (0,0,1) \\ \\
+c(x) = 0.2(1,0,0) + 0.4(0,1,0) + 0.4(0,0,1) \\ \\
+\text{So,} \\ \\
+R_x = 0,2 \\
+G_x = 0,4 \\
+B_x = 0,4 \\
+\end{gather*}
 
 \end{document}
