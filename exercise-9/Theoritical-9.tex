@@ -43,6 +43,11 @@ If a sample is at 22050 Hz, the highest frequency that we can expect to be prese
 
 \begin{flushleft}
 4. What does the sampling theorem of Whittaker-Shannon state?  \\[1\baselineskip]
+Let $f(t)$ be an $\Omega$-bandlimited function, with Fourier transform $F(w)$ that satisfies Eq. $(9)$ for some $\Omega > 0$. Furthermore, assume that $F(w)$ is piecewise continuous on $[-\Omega, \Omega]$. Then $f = F^{-1}(F)$ is completely determined at any $t \epsilon R$ by its values at the points $tk = \frac{k\pi}{\Omega} $, $k = 0, \pm1, \pm2, ... $, as follows
+
+\begin{gather*}
+f(t) = \displaystyle\sum_{k=-\infty}^{\infty} f (\frac{k\pi}{\Omega}) sinc ( \frac{\Omega t}{\pi} - k )
+\end{gather*}
 
 \end{flushleft}
 
