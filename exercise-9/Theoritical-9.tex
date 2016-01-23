@@ -1,0 +1,49 @@
+% header
+\documentclass[10pt,a4paper]{article}
+
+\usepackage[latin1]{inputenc}
+\usepackage{hyperref}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+% the document
+\begin{document}
+
+% create the title
+% Please replace the data in brackets [] with actual data.
+\title{Solution - Exercise [$9$]\\
+\small{Introduction to Computer Graphics - B-IT Master Course}}
+\author{ [Melisa Cecilia] \and [Duy Khanh Gian] \and [Chenyu Zhao]}
+\date{\today}
+\maketitle
+
+\section*{Theoretical Exercise}
+
+\begin{flushleft}
+1. What are the use cases of low-pass filters in the field of computer graphics and how are they implemented? \\[1\baselineskip]
+
+Usage of low-pass filters : Remove random noise, remove periodic noise, reveal a background pattern, image smoothing \\[1\baselineskip]
+Implementation:  Calculates the average of a pixel and all of its eight immediate neighbors. The result replaces the original value of the pixel. The process is repeated for every pixel in the image.
+\end{flushleft}
+
+\begin{flushleft}
+2. Why is discrete convolution using an ideal low-pass filter impracticable in the spatial domain? \\[1\baselineskip]
+
+The maximum of the convolution grows logarithmically. The filter is not stable as the input is bounded -- by 1, but the output gets arbitrarily large as the input gets longer and longer.
+
+\end{flushleft}
+
+\begin{flushleft}
+3. What is the Nyquist frequency and what is its connection to low-pass filters?  \\[1\baselineskip]
+
+The Nyquist frequency is the bandwidth of a sampled signal, and is equal to half the sampling frequency of that signal. \\
+If a sample is at 22050 Hz, the highest frequency that we can expect to be present in the sampled signal is 11025 Hz. This means that to heed this expectation, we should run the continuous signal through a low-pass filter with a cut-off frequency below 11025 Hz; otherwise, we would experience the phenomenon of aliasing.
+
+\end{flushleft}
+
+\begin{flushleft}
+4. What does the sampling theorem of Whittaker-Shannon state?  \\[1\baselineskip]
+
+\end{flushleft}
+
+\end{document}
